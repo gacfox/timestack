@@ -52,19 +52,13 @@ dist-electron/   Electron 构建产物（生成）
 npm install
 ```
 
-启动开发模式（Electron）。
+启动Electron开发模式。
 
 ```bash
 npm run electron:dev
 ```
 
-构建项目。
-
-```bash
-npm run build
-```
-
-打包。
+Electron打包。
 
 ```bash
 npm run electron:build
