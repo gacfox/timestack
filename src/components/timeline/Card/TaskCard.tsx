@@ -72,7 +72,7 @@ export default function TaskCard({
       onDragEnd={handleDragEnd}
     >
       <button
-        className={`flex-shrink-0 w-4 h-4 rounded border ${
+        className={`shrink-0 w-4 h-4 rounded border ${
           task.isCompleted ? "bg-primary border-primary" : "border-primary"
         } flex items-center justify-center`}
         onClick={onToggleComplete}

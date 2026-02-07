@@ -401,7 +401,7 @@ export default function TimelineView({
 
       {contextMenu && (
         <div
-          className="fixed z-50 min-w-[140px] rounded-md border bg-popover p-1 shadow-md"
+          className="fixed z-50 min-w-35 rounded-md border bg-popover p-1 shadow-md"
           style={{ left: contextMenu.x, top: contextMenu.y }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -445,7 +445,7 @@ export default function TimelineView({
 
       {blankMenu && (
         <div
-          className="fixed z-50 min-w-[160px] rounded-md border bg-popover p-1 shadow-md"
+          className="fixed z-50 min-w-40 rounded-md border bg-popover p-1 shadow-md"
           style={{ left: blankMenu.x, top: blankMenu.y }}
           onClick={(e) => e.stopPropagation()}
         >

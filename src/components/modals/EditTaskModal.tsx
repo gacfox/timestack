@@ -122,7 +122,7 @@ export default function EditTaskModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="任务描述"
-              className="w-full min-h-[96px] p-2 border rounded-md resize-y"
+              className="w-full min-h-24 p-2 border rounded-md resize-y"
             />
           </div>
           <div>

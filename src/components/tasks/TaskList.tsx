@@ -146,7 +146,7 @@ function TaskCardItem({ task, onToggle, onShowDetail }: TaskCardItemProps) {
   return (
     <Card className="p-4 flex items-start gap-3 hover:shadow-md transition-shadow cursor-pointer">
       <button
-        className={`flex-shrink-0 w-5 h-5 rounded border ${
+        className={`shrink-0 w-5 h-5 rounded border ${
           task.isCompleted ? "bg-primary border-primary" : "border-primary"
         } flex items-center justify-center mt-0.5`}
         onClick={(e) => {
