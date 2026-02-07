@@ -1,0 +1,36 @@
+# dependencies
+node_modules
+
+# production
+dist
+dist-electron
+release
+
+# misc
+.DS_Store
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode
+.VSCodeCounter
+
+# AI
+AGENTS*.md
+CLAUDE*.md
+GEMINI*.md
+QWEN*.md
+.cursorrules
+.windsurfrules
+CODEX*.md
+.claude/
+.gemini/
+.cursor/
+.windsurf/
+.clinerules/
+.ai/
+.vibecache/

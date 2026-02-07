@@ -1,0 +1,27 @@
+{
+  "appId": "com.timestack.app",
+  "productName": "Timestack",
+  "directories": {
+    "output": "release",
+    "buildResources": "build"
+  },
+  "files": ["dist/**/*", "dist-electron/**/*", "index.html", "package.json"],
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  },
+  "winCodeSign": {
+    "disabled": true
+  },
+  "electronVersion": "40.0.0"
+}
