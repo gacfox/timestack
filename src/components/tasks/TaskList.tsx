@@ -13,7 +13,11 @@ import { useAppStore } from "@/stores/useAppStore";
 
 type SortOption = "dueDate" | "priority" | "created";
 
-export default function TaskList() {
+interface TaskListProps {
+  onJumpToSchedule?: (task: any) => void;
+}
+
+export default function TaskList({ onJumpToSchedule }: TaskListProps) {
   const tasks = useTaskStore((state) => state.tasks);
   const toggleTaskComplete = useTaskStore((state) => state.toggleTaskComplete);
   const showCompleted = useAppStore((state) => state.showCompletedTasks);
@@ -89,6 +93,7 @@ export default function TaskList() {
                   task={task}
                   onToggle={() => toggleTaskComplete(task.id)}
                   onShowDetail={() => setDetailTask(task)}
+                  onJumpToSchedule={() => onJumpToSchedule?.(task)}
                 />
               ))
             )}
@@ -109,6 +114,7 @@ export default function TaskList() {
                     task={task}
                     onToggle={() => toggleTaskComplete(task.id)}
                     onShowDetail={() => setDetailTask(task)}
+                    onJumpToSchedule={() => onJumpToSchedule?.(task)}
                   />
                 ))}
             </div>
@@ -134,9 +140,15 @@ interface TaskCardItemProps {
   task: any;
   onToggle: () => void;
   onShowDetail: () => void;
+  onJumpToSchedule: () => void;
 }
 
-function TaskCardItem({ task, onToggle, onShowDetail }: TaskCardItemProps) {
+function TaskCardItem({
+  task,
+  onToggle,
+  onShowDetail,
+  onJumpToSchedule,
+}: TaskCardItemProps) {
   const priorityColors: Record<string, string> = {
     high: "bg-red-500",
     medium: "bg-yellow-500",
@@ -177,6 +189,17 @@ function TaskCardItem({ task, onToggle, onShowDetail }: TaskCardItemProps) {
           >
             {task.title || "无标题"}
           </h4>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-6 px-2 text-xs"
+            onClick={(e) => {
+              e.stopPropagation();
+              onJumpToSchedule();
+            }}
+          >
+            日程表
+          </Button>
           <Button
             variant="outline"
             size="sm"

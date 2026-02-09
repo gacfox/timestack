@@ -12,6 +12,7 @@ import ReportPage from "@/components/report/ReportPage";
 import { useEventStore } from "@/stores/useEventStore";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppointmentStore } from "@/stores/useAppointmentStore";
+import { useAppStore } from "@/stores/useAppStore";
 import { addMinutes } from "@/utils/time";
 import {
   DEFAULT_EVENT_DURATION_MINUTES,
@@ -44,6 +45,8 @@ export default function MainContent() {
   const updateEvent = useEventStore((state) => state.updateEvent);
   const addTask = useTaskStore((state) => state.addTask);
   const updateTask = useTaskStore((state) => state.updateTask);
+  const setSelectedDate = useAppStore((state) => state.setSelectedDate);
+  const setScrollToTime = useAppStore((state) => state.setScrollToTime);
   const addAppointment = useAppointmentStore((state) => state.addAppointment);
   const updateAppointment = useAppointmentStore(
     (state) => state.updateAppointment,
@@ -86,6 +89,13 @@ export default function MainContent() {
       await updateAppointment(editingAppointment.id, data);
       setEditingAppointment(null);
     }
+  };
+
+  const handleJumpToSchedule = (task: any) => {
+    const targetTime = new Date(task.startTime);
+    setSelectedDate(targetTime);
+    setScrollToTime(targetTime);
+    setActiveTab("schedule");
   };
 
   const openEventModal = (event?: any, seed?: any) => {
@@ -213,7 +223,7 @@ export default function MainContent() {
           </TabsContent>
 
           <TabsContent value="tasks" className="flex-1 m-0 mt-0 min-h-0">
-            <TaskList />
+            <TaskList onJumpToSchedule={handleJumpToSchedule} />
           </TabsContent>
         </div>
       </Tabs>
