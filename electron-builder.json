@@ -20,8 +20,5 @@
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true
   },
-  "winCodeSign": {
-    "disabled": true
-  },
   "electronVersion": "40.0.0"
 }
