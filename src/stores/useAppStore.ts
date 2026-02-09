@@ -19,7 +19,7 @@ interface AppStore {
 export const useAppStore = create<AppStore>((set) => ({
   currentDate: new Date(),
   selectedDate: new Date(),
-  viewMode: "day",
+  viewMode: "around_5_days",
   theme: "system",
   showCompletedTasks: false,
   scrollToTime: null,
