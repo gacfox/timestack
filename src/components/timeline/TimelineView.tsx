@@ -66,8 +66,14 @@ export default function TimelineView({
   onCreateAppointmentAt,
   isActive,
 }: TimelineViewProps) {
-  const { selectedDate, viewMode, setViewMode, scrollToTime, setScrollToTime } =
-    useAppStore();
+  const {
+    selectedDate,
+    viewMode,
+    setViewMode,
+    scrollToTime,
+    setScrollToTime,
+    setSelectedDate,
+  } = useAppStore();
   const events = useEventStore((state) => state.events);
   const updateEvent = useEventStore((state) => state.updateEvent);
   const deleteEvent = useEventStore((state) => state.deleteEvent);
@@ -143,6 +149,12 @@ export default function TimelineView({
 
   const handleViewModeChange = (value: string) => {
     setViewMode(value as "day" | "week" | "next_4_days" | "around_5_days");
+  };
+
+  const handleGoToday = () => {
+    const now = new Date();
+    setSelectedDate(now);
+    setScrollToTime(now);
   };
 
   const handleDragStart = (_e: React.DragEvent, item: any) => {
@@ -364,6 +376,9 @@ export default function TimelineView({
   return (
     <div className="h-full flex flex-col min-h-0">
       <div className="p-4 border-b flex items-center gap-4">
+        <Button variant="outline" onClick={handleGoToday}>
+          今天
+        </Button>
         <ViewModeTabs value={viewMode} onChange={handleViewModeChange} />
       </div>
       <DateHeader dates={dates} />
