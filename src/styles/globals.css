@@ -123,3 +123,104 @@
     @apply bg-background text-foreground;
   }
 }
+
+.report-markdown {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+
+.report-markdown :where(p, ul, ol, pre, blockquote, table, hr) {
+  margin: 0.4rem 0;
+}
+
+.report-markdown :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0.9rem 0 0.4rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.report-markdown :where(h1) {
+  font-size: 1.35rem;
+}
+
+.report-markdown :where(h2) {
+  font-size: 1.2rem;
+}
+
+.report-markdown :where(h3) {
+  font-size: 1.05rem;
+}
+
+.report-markdown :where(ul, ol) {
+  padding-left: 1.25rem;
+}
+
+.report-markdown :where(li) {
+  margin: 0.15rem 0;
+}
+
+.report-markdown :where(strong) {
+  font-weight: 600;
+}
+
+.report-markdown :where(a) {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.report-markdown :where(code) {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.9em;
+  background: color-mix(in oklch, var(--muted) 70%, transparent);
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.35rem;
+  border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+}
+
+.report-markdown :where(pre) {
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.6rem;
+  background: color-mix(in oklch, var(--muted) 75%, transparent);
+  border: 1px solid color-mix(in oklch, var(--border) 75%, transparent);
+  overflow: auto;
+}
+
+.report-markdown :where(pre code) {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.report-markdown :where(blockquote) {
+  padding-left: 0.75rem;
+  border-left: 3px solid color-mix(in oklch, var(--border) 70%, transparent);
+  color: color-mix(in oklch, var(--foreground) 75%, transparent);
+}
+
+.report-markdown :where(hr) {
+  border: 0;
+  border-top: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+  margin: 0.6rem 0;
+}
+
+.report-markdown :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.report-markdown :where(th, td) {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-markdown :where(th) {
+  background: color-mix(in oklch, var(--muted) 70%, transparent);
+  font-weight: 600;
+}
