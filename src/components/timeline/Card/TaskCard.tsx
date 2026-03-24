@@ -2,6 +2,7 @@ import React from "react";
 import { format } from "date-fns";
 import { getPriorityStyles } from "@/utils/common";
 import { Task } from "@/types";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface TaskCardProps {
   task: Task;
@@ -12,7 +13,7 @@ interface TaskCardProps {
   zIndex?: number;
   onClick: () => void;
   onContextMenu?: (e: React.MouseEvent) => void;
-  onToggleComplete: (e: React.MouseEvent) => void;
+  onToggleComplete: () => void;
   onDragStart?: (e: React.DragEvent, task: Task) => void;
   onDragEnd?: (e: React.DragEvent, task: Task) => void;
 }
@@ -71,28 +72,12 @@ export default function TaskCard({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <button
-        className={`shrink-0 w-4 h-4 rounded border ${
-          task.isCompleted ? "bg-primary border-primary" : "border-primary"
-        } flex items-center justify-center`}
-        onClick={onToggleComplete}
-      >
-        {task.isCompleted && (
-          <svg
-            className="w-3 h-3 text-primary-foreground"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        )}
-      </button>
+      <Checkbox
+        className="size-4"
+        checked={task.isCompleted}
+        onClick={(e) => e.stopPropagation()}
+        onCheckedChange={() => onToggleComplete()}
+      />
       <div
         className={`text-xs font-medium ${priorityStyle.text} truncate flex-1 ${task.isCompleted ? "line-through opacity-70" : ""}`}
       >

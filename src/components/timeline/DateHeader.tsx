@@ -4,6 +4,8 @@ import { Target } from "lucide-react";
 import { formatDateLabel } from "@/utils/time";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppStore } from "@/stores/useAppStore";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,7 +25,7 @@ export default function DateHeader({ dates }: DateHeaderProps) {
 
   return (
     <div className="flex border-b bg-muted/50">
-      <div className="w-16 flex-shrink-0" />
+      <div className="w-16 shrink-0" />
       {dates.map((date) => {
         const isToday = new Date().toDateString() === date.toDateString();
         const dueTasks = tasks.filter((task) =>
@@ -43,14 +45,16 @@ export default function DateHeader({ dates }: DateHeaderProps) {
               {dueTasks.length > 0 && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button
-                      className="inline-flex h-5 w-5 items-center justify-center rounded text-destructive/80 hover:text-destructive hover:bg-destructive/10"
+                    <Button
+                      variant="ghost"
+                      size="icon-xs"
+                      className="h-5 w-5 text-destructive/80 hover:text-destructive hover:bg-destructive/10"
                       aria-label="查看当天到期任务"
                     >
                       <Target className="h-3.5 w-3.5" />
-                    </button>
+                    </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="min-w-[200px]">
+                  <DropdownMenuContent align="end" className="min-w-50">
                     {dueTasks.map((task) => (
                       <DropdownMenuItem
                         key={task.id}
@@ -58,16 +62,17 @@ export default function DateHeader({ dates }: DateHeaderProps) {
                         onSelect={(e) => e.preventDefault()}
                       >
                         <label className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
+                          <Checkbox
                             checked={task.isCompleted}
-                            onChange={() => toggleTaskComplete(task.id)}
-                            className="h-3.5 w-3.5 accent-primary"
+                            onCheckedChange={() => toggleTaskComplete(task.id)}
+                            className="h-3.5 w-3.5"
                           />
                         </label>
-                        <button
+                        <Button
                           type="button"
-                          className={`flex-1 min-w-0 text-left truncate ${
+                          variant="ghost"
+                          size="sm"
+                          className={`flex-1 min-w-0 justify-start truncate px-1 ${
                             task.isCompleted
                               ? "line-through text-muted-foreground"
                               : ""
@@ -78,7 +83,7 @@ export default function DateHeader({ dates }: DateHeaderProps) {
                           }}
                         >
                           {task.title || "无标题"}
-                        </button>
+                        </Button>
                         <span
                           className={`text-xs text-muted-foreground ${task.isCompleted ? "line-through" : ""}`}
                         >

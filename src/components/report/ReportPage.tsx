@@ -31,6 +31,15 @@ import {
 } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { useEventStore } from "@/stores/useEventStore";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useSettingsStore } from "@/stores/useSettingsStore";
@@ -410,75 +419,81 @@ export default function ReportPage({ open, onClose }: ReportPageProps) {
               <h3 className="font-medium mb-3">自定义日期</h3>
               <div className="space-y-2">
                 {reportType === "daily" && (
-                  <div>
-                    <label className="text-xs text-muted-foreground">
+                  <Field>
+                    <FieldLabel className="text-xs text-muted-foreground">
                       日期
-                    </label>
-                    <input
+                    </FieldLabel>
+                    <Input
                       type="date"
                       value={dailyDate}
                       onChange={(e) => setDailyDate(e.target.value)}
-                      className="w-full p-2 border rounded-md text-sm"
+                      className="text-sm"
                     />
-                  </div>
+                  </Field>
                 )}
                 {reportType === "weekly" && (
-                  <div>
-                    <label className="text-xs text-muted-foreground">周</label>
-                    <input
+                  <Field>
+                    <FieldLabel className="text-xs text-muted-foreground">
+                      周
+                    </FieldLabel>
+                    <Input
                       type="week"
                       value={weekValue}
                       onChange={(e) => setWeekValue(e.target.value)}
-                      className="w-full p-2 border rounded-md text-sm"
+                      className="text-sm"
                     />
-                  </div>
+                  </Field>
                 )}
                 {reportType === "quarterly" && (
                   <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="text-xs text-muted-foreground">
+                    <Field>
+                      <FieldLabel className="text-xs text-muted-foreground">
                         年份
-                      </label>
-                      <input
+                      </FieldLabel>
+                      <Input
                         type="number"
                         value={quarterYear}
                         onChange={(e) => setQuarterYear(Number(e.target.value))}
-                        className="w-full p-2 border rounded-md text-sm"
+                        className="text-sm"
                         min={2000}
                         max={2100}
                       />
-                    </div>
-                    <div>
-                      <label className="text-xs text-muted-foreground">
+                    </Field>
+                    <Field>
+                      <FieldLabel className="text-xs text-muted-foreground">
                         季度
-                      </label>
-                      <select
-                        value={quarter}
-                        onChange={(e) => setQuarter(Number(e.target.value))}
-                        className="w-full p-2 border rounded-md text-sm"
+                      </FieldLabel>
+                      <Select
+                        value={String(quarter)}
+                        onValueChange={(value) => setQuarter(Number(value))}
                       >
-                        <option value={1}>Q1</option>
-                        <option value={2}>Q2</option>
-                        <option value={3}>Q3</option>
-                        <option value={4}>Q4</option>
-                      </select>
-                    </div>
+                        <SelectTrigger className="text-sm">
+                          <SelectValue placeholder="选择季度" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">Q1</SelectItem>
+                          <SelectItem value="2">Q2</SelectItem>
+                          <SelectItem value="3">Q3</SelectItem>
+                          <SelectItem value="4">Q4</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </Field>
                   </div>
                 )}
                 {reportType === "yearly" && (
-                  <div>
-                    <label className="text-xs text-muted-foreground">
+                  <Field>
+                    <FieldLabel className="text-xs text-muted-foreground">
                       年份
-                    </label>
-                    <input
+                    </FieldLabel>
+                    <Input
                       type="number"
                       value={yearValue}
                       onChange={(e) => setYearValue(Number(e.target.value))}
-                      className="w-full p-2 border rounded-md text-sm"
+                      className="text-sm"
                       min={2000}
                       max={2100}
                     />
-                  </div>
+                  </Field>
                 )}
               </div>
             </div>

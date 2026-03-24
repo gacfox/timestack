@@ -8,6 +8,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { addDays } from "date-fns";
 
 interface EditTaskModalProps {
@@ -108,41 +117,45 @@ export default function EditTaskModal({
           <DialogTitle>{initialData ? "编辑任务" : "新建任务"}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <div>
-            <label className="text-sm font-medium mb-2 block">标题 *</label>
+          <Field>
+            <FieldLabel htmlFor="task-title">标题 *</FieldLabel>
             <Input
+              id="task-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="任务标题"
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">描述</label>
-            <textarea
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="task-description">描述</FieldLabel>
+            <Textarea
+              id="task-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="任务描述"
-              className="w-full min-h-24 p-2 border rounded-md resize-y"
+              className="min-h-24 resize-y"
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">优先级</label>
-            <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-              className="w-full p-2 border rounded-md"
-            >
-              {priorities.map((p) => (
-                <option key={p} value={p}>
-                  {priorityLabels[p as keyof typeof priorityLabels]}
-                </option>
-              ))}
-            </select>
-          </div>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="task-priority">优先级</FieldLabel>
+            <Select value={priority} onValueChange={setPriority}>
+              <SelectTrigger id="task-priority">
+                <SelectValue placeholder="选择优先级" />
+              </SelectTrigger>
+              <SelectContent>
+                {priorities.map((p) => (
+                  <SelectItem key={p} value={p}>
+                    {priorityLabels[p as keyof typeof priorityLabels]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </Field>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-sm font-medium mb-2 block">开始时间</label>
+            <Field>
+              <FieldLabel htmlFor="task-start-time">开始时间</FieldLabel>
               <Input
+                id="task-start-time"
                 type="datetime-local"
                 value={startTime}
                 onChange={(e) => {
@@ -156,16 +169,17 @@ export default function EditTaskModal({
                   }
                 }}
               />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">截止时间</label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="task-due-date">截止时间</FieldLabel>
               <Input
+                id="task-due-date"
                 type="datetime-local"
                 value={dueDate}
                 min={startTime || undefined}
                 onChange={(e) => setDueDate(e.target.value)}
               />
-            </div>
+            </Field>
           </div>
         </div>
         <DialogFooter>

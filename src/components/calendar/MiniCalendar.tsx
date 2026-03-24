@@ -7,6 +7,7 @@ import {
   startOfMonth,
 } from "date-fns";
 import { zhCN } from "date-fns/locale";
+import { Button } from "@/components/ui/button";
 
 interface MiniCalendarProps {
   selectedDate: Date;
@@ -53,21 +54,25 @@ export default function MiniCalendar({
   return (
     <div className="mini-calendar">
       <div className="flex items-center justify-between mb-4">
-        <button
-          className="p-1 hover:bg-muted rounded transition-colors"
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className="h-7 w-7"
           onClick={goToPreviousMonth}
         >
           ‹
-        </button>
+        </Button>
         <span className="font-medium">
           {format(currentMonth, "yyyy年 M月", { locale: zhCN })}
         </span>
-        <button
-          className="p-1 hover:bg-muted rounded transition-colors"
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className="h-7 w-7"
           onClick={goToNextMonth}
         >
           ›
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-7 gap-1 text-center text-xs">
@@ -77,21 +82,24 @@ export default function MiniCalendar({
           </div>
         ))}
 
-        {days.map((day, index) => (
-          <button
-            key={index}
-            className={`
-              p-1 rounded transition-colors
-              ${day ? "hover:bg-muted cursor-pointer" : ""}
-              ${day && isSameDay(day, selectedDate) ? "bg-primary text-primary-foreground hover:bg-primary/90" : ""}
-              ${day && isSameDay(day, new Date()) && !isSameDay(day, selectedDate) ? "font-bold text-primary bg-primary/10" : ""}
-            `}
-            onClick={() => day && onSelectDate(day)}
-            disabled={!day}
-          >
-            {day ? format(day, "d") : ""}
-          </button>
-        ))}
+        {days.map((day, index) => {
+          const isSelected = day && isSameDay(day, selectedDate);
+          const isToday = day && isSameDay(day, new Date());
+          return (
+            <Button
+              key={index}
+              variant={isSelected ? "default" : "ghost"}
+              size="icon-sm"
+              className={`h-7 w-7 text-xs ${
+                isSelected ? "hover:bg-primary/90" : ""
+              } ${isToday && !isSelected ? "font-bold text-primary bg-primary/10" : ""}`}
+              onClick={() => day && onSelectDate(day)}
+              disabled={!day}
+            >
+              {day ? format(day, "d") : ""}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );

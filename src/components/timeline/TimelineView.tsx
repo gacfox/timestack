@@ -336,10 +336,7 @@ export default function TimelineView({
             zIndex={zIndex}
             onClick={() => setActiveItemId(item.id)}
             onContextMenu={handleContextMenu}
-            onToggleComplete={(e) => {
-              e.stopPropagation();
-              handleTaskComplete(item);
-            }}
+            onToggleComplete={() => handleTaskComplete(item)}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           />
@@ -420,8 +417,10 @@ export default function TimelineView({
           style={{ left: contextMenu.x, top: contextMenu.y }}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent"
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start"
             onClick={() => {
               const item = contextMenu.item;
               setContextMenu(null);
@@ -431,18 +430,22 @@ export default function TimelineView({
             }}
           >
             编辑
-          </button>
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start"
             onClick={() => {
               setDetailItem(contextMenu.item);
               setContextMenu(null);
             }}
           >
             详情
-          </button>
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent text-destructive"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start text-destructive hover:text-destructive"
             onClick={() => {
               const item = contextMenu.item;
               setContextMenu(null);
@@ -454,7 +457,7 @@ export default function TimelineView({
             }}
           >
             删除
-          </button>
+          </Button>
         </div>
       )}
 
@@ -464,8 +467,10 @@ export default function TimelineView({
           style={{ left: blankMenu.x, top: blankMenu.y }}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent"
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start"
             onClick={() => {
               const { dateTime } = blankMenu;
               setBlankMenu(null);
@@ -473,9 +478,11 @@ export default function TimelineView({
             }}
           >
             新建事件
-          </button>
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start"
             onClick={() => {
               const { dateTime } = blankMenu;
               setBlankMenu(null);
@@ -483,9 +490,11 @@ export default function TimelineView({
             }}
           >
             新建任务
-          </button>
-          <button
-            className="w-full text-left px-2 py-1.5 text-sm rounded hover:bg-accent"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start"
             onClick={() => {
               const { dateTime } = blankMenu;
               setBlankMenu(null);
@@ -493,7 +502,7 @@ export default function TimelineView({
             }}
           >
             新建预约
-          </button>
+          </Button>
         </div>
       )}
 

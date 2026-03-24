@@ -2,6 +2,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -157,31 +158,12 @@ function TaskCardItem({
 
   return (
     <Card className="p-4 flex items-start gap-3 hover:shadow-md transition-shadow cursor-pointer">
-      <button
-        className={`shrink-0 w-5 h-5 rounded border ${
-          task.isCompleted ? "bg-primary border-primary" : "border-primary"
-        } flex items-center justify-center mt-0.5`}
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggle();
-        }}
-      >
-        {task.isCompleted && (
-          <svg
-            className="w-3.5 h-3.5 text-primary-foreground"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        )}
-      </button>
+      <Checkbox
+        className="mt-0.5"
+        checked={task.isCompleted}
+        onClick={(e) => e.stopPropagation()}
+        onCheckedChange={() => onToggle()}
+      />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           <h4

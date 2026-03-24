@@ -8,6 +8,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { addMinutes } from "@/utils/time";
 import { DEFAULT_EVENT_DURATION_MINUTES } from "@/constants";
 
@@ -132,41 +141,45 @@ export default function EditEventModal({
           <DialogTitle>{initialData ? "编辑事件" : "新建事件"}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <div>
-            <label className="text-sm font-medium mb-2 block">标题 *</label>
+          <Field>
+            <FieldLabel htmlFor="event-title">标题 *</FieldLabel>
             <Input
+              id="event-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="事件标题"
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">描述</label>
-            <textarea
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="event-description">描述</FieldLabel>
+            <Textarea
+              id="event-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="事件描述"
-              className="w-full min-h-24 p-2 border rounded-md resize-y"
+              className="min-h-24 resize-y"
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">优先级</label>
-            <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-              className="w-full p-2 border rounded-md"
-            >
-              {priorities.map((p) => (
-                <option key={p} value={p}>
-                  {priorityLabels[p as keyof typeof priorityLabels]}
-                </option>
-              ))}
-            </select>
-          </div>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="event-priority">优先级</FieldLabel>
+            <Select value={priority} onValueChange={setPriority}>
+              <SelectTrigger id="event-priority">
+                <SelectValue placeholder="选择优先级" />
+              </SelectTrigger>
+              <SelectContent>
+                {priorities.map((p) => (
+                  <SelectItem key={p} value={p}>
+                    {priorityLabels[p as keyof typeof priorityLabels]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </Field>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-sm font-medium mb-2 block">开始时间</label>
+            <Field>
+              <FieldLabel htmlFor="event-start-time">开始时间</FieldLabel>
               <Input
+                id="event-start-time"
                 type="datetime-local"
                 value={startTime}
                 onChange={(e) => {
@@ -181,10 +194,11 @@ export default function EditEventModal({
                   }
                 }}
               />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">结束时间</label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="event-end-time">结束时间</FieldLabel>
               <Input
+                id="event-end-time"
                 type="datetime-local"
                 value={endTime}
                 min={startTime || undefined}
@@ -193,12 +207,10 @@ export default function EditEventModal({
                   setSelectedDuration(null);
                 }}
               />
-            </div>
+            </Field>
           </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">
-              快速设置时长
-            </label>
+          <Field>
+            <FieldLabel>快速设置时长</FieldLabel>
             <div className="flex gap-2 flex-wrap">
               {durations.map((d) => (
                 <Button
@@ -211,7 +223,7 @@ export default function EditEventModal({
                 </Button>
               ))}
             </div>
-          </div>
+          </Field>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>

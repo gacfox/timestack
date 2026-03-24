@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 import { Eye, EyeOff, Github } from "lucide-react";
 import logo from "@/assets/icon@512.png";
+import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
 
 interface SettingsModalProps {
   open: boolean;
@@ -91,24 +93,27 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               配置大语言模型用于生成工作报告
             </DialogDescription>
             <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              <Field>
+                <FieldLabel htmlFor="settings-api-key">
                   API Key{" "}
                   <span className="text-xs text-muted-foreground">
                     （可选）
                   </span>
-                </label>
+                </FieldLabel>
                 <div className="relative">
                   <Input
+                    id="settings-api-key"
                     type={showApiKey ? "text" : "password"}
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="输入 API Key"
                     className="pr-10"
                   />
-                  <button
+                  <Button
                     type="button"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    variant="ghost"
+                    size="icon-sm"
+                    className="absolute right-1 top-1/2 -translate-y-1/2"
                     onClick={() => setShowApiKey((v) => !v)}
                     aria-label={showApiKey ? "隐藏 API Key" : "显示 API Key"}
                   >
@@ -117,35 +122,35 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
                     ) : (
                       <Eye className="h-4 w-4" />
                     )}
-                  </button>
+                  </Button>
                 </div>
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="settings-base-url">
                   Base URL{" "}
                   <span className="text-xs text-muted-foreground">
                     （可选）
                   </span>
-                </label>
+                </FieldLabel>
                 <Input
+                  id="settings-base-url"
                   value={baseUrl}
                   onChange={(e) => setBaseUrl(e.target.value)}
                   placeholder="例如：https://api.openai.com/v1"
                 />
-                <p className="text-xs text-muted-foreground mt-1">
+                <FieldDescription>
                   留空使用默认的 OpenAI API 地址
-                </p>
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">
-                  模型名称
-                </label>
+                </FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="settings-model-name">模型名称</FieldLabel>
                 <Input
+                  id="settings-model-name"
                   value={modelName}
                   onChange={(e) => setModelName(e.target.value)}
                   placeholder="例如：gpt-4o-mini"
                 />
-              </div>
+              </Field>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={onClose}>
@@ -160,46 +165,50 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               自定义不同类型报告的生成提示词
             </DialogDescription>
             <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              <Field>
+                <FieldLabel htmlFor="settings-daily-template">
                   日报模板
-                </label>
-                <textarea
-                  className="w-full p-2 border rounded-md min-h-20 overflow-auto scrollbar-hide"
+                </FieldLabel>
+                <Textarea
+                  id="settings-daily-template"
+                  className="min-h-20 overflow-auto scrollbar-hide"
                   value={dailyPrompt}
                   onChange={(e) => setDailyPrompt(e.target.value)}
                 />
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="settings-weekly-template">
                   周报模板
-                </label>
-                <textarea
-                  className="w-full p-2 border rounded-md min-h-20 overflow-auto scrollbar-hide"
+                </FieldLabel>
+                <Textarea
+                  id="settings-weekly-template"
+                  className="min-h-20 overflow-auto scrollbar-hide"
                   value={weeklyPrompt}
                   onChange={(e) => setWeeklyPrompt(e.target.value)}
                 />
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="settings-monthly-template">
                   季度报模板
-                </label>
-                <textarea
-                  className="w-full p-2 border rounded-md min-h-20 overflow-auto scrollbar-hide"
+                </FieldLabel>
+                <Textarea
+                  id="settings-monthly-template"
+                  className="min-h-20 overflow-auto scrollbar-hide"
                   value={monthlyPrompt}
                   onChange={(e) => setMonthlyPrompt(e.target.value)}
                 />
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="settings-yearly-template">
                   年报模板
-                </label>
-                <textarea
-                  className="w-full p-2 border rounded-md min-h-20 overflow-auto scrollbar-hide"
+                </FieldLabel>
+                <Textarea
+                  id="settings-yearly-template"
+                  className="min-h-20 overflow-auto scrollbar-hide"
                   value={yearlyPrompt}
                   onChange={(e) => setYearlyPrompt(e.target.value)}
                 />
-              </div>
+              </Field>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={onClose}>

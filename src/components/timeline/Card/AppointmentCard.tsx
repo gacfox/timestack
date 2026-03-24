@@ -3,6 +3,7 @@ import { addMinutes, formatTimeRange } from "@/utils/time";
 import { getPriorityStyles } from "@/utils/common";
 import { Appointment } from "@/types";
 import { PIXELS_PER_MINUTE, TIME_STEP_MINUTES } from "@/constants";
+import { Button } from "@/components/ui/button";
 
 interface AppointmentCardProps {
   appointment: Appointment;
@@ -147,12 +148,14 @@ export default function AppointmentCard({
           e.stopPropagation();
         }}
       />
-      <button
-        className="absolute top-1 right-1 bg-white/80 hover:bg-white rounded px-1.5 py-0.5 text-[10px] font-medium border"
+      <Button
+        variant="outline"
+        size="xs"
+        className="absolute top-1 right-1 h-5 px-1.5 text-[10px]"
         onClick={onConvertToEvent}
       >
         转事件
-      </button>
+      </Button>
     </div>
   );
 }
