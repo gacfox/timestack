@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { isSameDay } from "date-fns";
 import { Target } from "lucide-react";
-import { formatDateLabel } from "@/utils/time";
+import { formatDateLabel } from "@/lib/time";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppStore } from "@/stores/useAppStore";
 import { Button } from "@/components/ui/button";

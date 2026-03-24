@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { formatTimeRange, addMinutes } from "@/utils/time";
-import { getPriorityStyles } from "@/utils/common";
+import { formatTimeRange, addMinutes } from "@/lib/time";
+import { getPriorityStyles } from "@/lib/common";
 import { Event } from "@/types";
 import { PIXELS_PER_MINUTE, TIME_STEP_MINUTES } from "@/constants";
 

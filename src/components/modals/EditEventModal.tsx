@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Field, FieldLabel } from "@/components/ui/field";
-import { addMinutes } from "@/utils/time";
+import { addMinutes } from "@/lib/time";
 import { DEFAULT_EVENT_DURATION_MINUTES } from "@/constants";
 
 interface EditEventModalProps {

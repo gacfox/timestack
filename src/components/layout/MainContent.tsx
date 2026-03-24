@@ -13,7 +13,7 @@ import { useEventStore } from "@/stores/useEventStore";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppointmentStore } from "@/stores/useAppointmentStore";
 import { useAppStore } from "@/stores/useAppStore";
-import { addMinutes } from "@/utils/time";
+import { addMinutes } from "@/lib/time";
 import {
   DEFAULT_EVENT_DURATION_MINUTES,
   DEFAULT_REMINDER_MINUTES,

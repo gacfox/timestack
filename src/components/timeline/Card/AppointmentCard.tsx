@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { addMinutes, formatTimeRange } from "@/utils/time";
-import { getPriorityStyles } from "@/utils/common";
+import { addMinutes, formatTimeRange } from "@/lib/time";
+import { getPriorityStyles } from "@/lib/common";
 import { Appointment } from "@/types";
 import { PIXELS_PER_MINUTE, TIME_STEP_MINUTES } from "@/constants";
 import { Button } from "@/components/ui/button";

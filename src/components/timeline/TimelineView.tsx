@@ -16,13 +16,13 @@ import { useAppStore } from "@/stores/useAppStore";
 import { useEventStore } from "@/stores/useEventStore";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppointmentStore } from "@/stores/useAppointmentStore";
-import { getDatesForView } from "@/utils/time";
+import { getDatesForView } from "@/lib/time";
 import {
   getItemTop,
   getItemHeight,
   pixelToTime,
   getOverlapIndex,
-} from "@/utils/overlap";
+} from "@/lib/overlap";
 import { DAY_HEIGHT } from "@/constants";
 import EventCard from "./Card/EventCard";
 import TaskCard from "./Card/TaskCard";

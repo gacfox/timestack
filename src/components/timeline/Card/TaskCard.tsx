@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import { getPriorityStyles } from "@/utils/common";
+import { getPriorityStyles } from "@/lib/common";
 import { Task } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 
