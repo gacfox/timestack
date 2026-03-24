@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +18,7 @@ import { useAppStore } from "@/stores/useAppStore";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 import MiniCalendar from "@/components/calendar/MiniCalendar";
 import logo from "@/assets/icon@512.png";
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   onCreateEvent: () => void;
@@ -71,11 +72,11 @@ export default function Sidebar({
           </Button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button className="w-full">
-              <Plus className="w-4 h-4 mr-2" />
-              新建
-            </Button>
+          <DropdownMenuTrigger
+            className={cn(buttonVariants({ className: "w-full" }))}
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            新建
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-48">
             <DropdownMenuItem onClick={onCreateEvent}>
