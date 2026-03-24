@@ -156,27 +156,26 @@ export default function MainContent() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-row">
+      <Sidebar
+        onCreateEvent={() => openEventModal()}
+        onCreateTask={() => openTaskModal()}
+        onCreateAppointment={() => openAppointmentModal()}
+        onOpenReports={() => setIsReportPageOpen(true)}
+        onOpenSettings={() => setShowSettingsModal(true)}
+      />
       <Tabs
         value={activeTab}
         onValueChange={(v) => setActiveTab(v as any)}
-        className="h-full flex min-h-0"
+        className="flex-1 flex flex-col min-h-0"
       >
-        <Sidebar
-          onCreateEvent={() => openEventModal()}
-          onCreateTask={() => openTaskModal()}
-          onCreateAppointment={() => openAppointmentModal()}
-          onOpenReports={() => setIsReportPageOpen(true)}
-          onOpenSettings={() => setShowSettingsModal(true)}
-        />
-        <div className="flex-1 flex flex-col min-h-0">
-          <TabsList className="m-4 w-fit">
-            <TabsTrigger value="schedule">日程表</TabsTrigger>
-            <TabsTrigger value="tasks">任务</TabsTrigger>
-          </TabsList>
+        <TabsList className="m-4 w-fit">
+          <TabsTrigger value="schedule">日程表</TabsTrigger>
+          <TabsTrigger value="tasks">任务</TabsTrigger>
+        </TabsList>
 
-          <TabsContent value="schedule" className="flex-1 m-0 mt-0 min-h-0">
-            <TimelineView
+        <TabsContent value="schedule" className="flex-1 m-0 mt-0 min-h-0">
+          <TimelineView
               onEditEvent={openEventModal}
               onEditTask={openTaskModal}
               onEditAppointment={openAppointmentModal}
@@ -220,12 +219,11 @@ export default function MainContent() {
                 });
               }}
             />
-          </TabsContent>
+        </TabsContent>
 
-          <TabsContent value="tasks" className="flex-1 m-0 mt-0 min-h-0">
-            <TaskList onJumpToSchedule={handleJumpToSchedule} />
-          </TabsContent>
-        </div>
+        <TabsContent value="tasks" className="flex-1 m-0 mt-0 min-h-0">
+          <TaskList onJumpToSchedule={handleJumpToSchedule} />
+        </TabsContent>
       </Tabs>
 
       <EditEventModal
