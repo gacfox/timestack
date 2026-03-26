@@ -4,7 +4,7 @@ import { Target } from "lucide-react";
 import { formatDateLabel } from "@/lib/time";
 import { useTaskStore } from "@/stores/useTaskStore";
 import { useAppStore } from "@/stores/useAppStore";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 interface DateHeaderProps {
   dates: Date[];
@@ -44,15 +45,14 @@ export default function DateHeader({ dates }: DateHeaderProps) {
               <span>{formatDateLabel(date)}</span>
               {dueTasks.length > 0 && (
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon-xs"
-                      className="h-5 w-5 text-destructive/80 hover:text-destructive hover:bg-destructive/10"
-                      aria-label="查看当天到期任务"
-                    >
-                      <Target className="h-3.5 w-3.5" />
-                    </Button>
+                  <DropdownMenuTrigger
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "icon-xs" }),
+                      "h-5 w-5 text-destructive/80 hover:text-destructive hover:bg-destructive/10",
+                    )}
+                    aria-label="查看当天到期任务"
+                  >
+                    <Target className="h-3.5 w-3.5" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="min-w-50">
                     {dueTasks.map((task) => (
